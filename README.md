@@ -1,4 +1,4 @@
-# Splunk_Upskilling
+# Splunk Upskilling
 
 ## What is SOC?
 SOC - Security Operations Centre
