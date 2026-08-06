@@ -59,7 +59,7 @@ A SOC can face too many alerts (too much data), false positives, alert fatigue, 
 
 ### Common Event Types in a SOC
 
-A SOC monitors events that could indicate **normal activity, suspicious behaviour or an attack**.
+- An event is anything that happens in a network/computer/software. A SOC monitors events that could indicate **normal activity, suspicious behaviour or an attack**. An event has a timestamp, raw eventtext, and a host (where the event is happening), a source (who), and extracted fields.
 
 | Event | Example |
 |---|---|
@@ -72,6 +72,7 @@ A SOC monitors events that could indicate **normal activity, suspicious behaviou
 | 💻 System | System/service started or stopped |
 
 ## What is SIEM?
+
 SIEM (**Security Information and Event Management**) - a SIEM collects security events from different systems, aggregates them, and analyses them to help security teams detect and investigate threats.
 
 I think of SIEM like a smart home security system. It has a camera that detects unusual movement, a door sensor, an app to alert the owner, and a report of detected activity. In cybersecurity, a SIEM works similarly:
@@ -106,7 +107,7 @@ A basic Splunk environment can be thought of as:
 ```text
 💻 Data Sources
      ↓
-📤 Universal Forwarders - in charge of ingestion to indexers, forwards the data from the data searches
+📤 Universal Forwarders - in charge of ingestion to indexers, forward the data from the data searches
      ↓
 📦 Indexers - The Indexer receives the data, stores and organises it, and makes it searchable. There are multiples present.
      ↓
