@@ -5,8 +5,8 @@ SOC - Security Operations Centre
 SOC is a team that monitors an organisation's systems for cyber threats. They detect, investigate and respond to suspicious activity.
 
 ### Key Functions
-- Security monitoring – Watch systems, networks and logs for suspicious activity.
-- Threat detection – Identify potential cyber threats and security incidents.
+- Monitoring – Watch systems, networks and logs for suspicious activity.
+- Detection – Identify potential cyber threats and security incidents.
 - Incident response – Work out whether an alert is a real threat or a false alarm.
 - Threat intelligence – understand current and emerging threats.
 - Security analysis – analyse data to understand risks and attacks.
