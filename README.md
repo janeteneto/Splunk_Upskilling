@@ -45,6 +45,10 @@ There are also other roles, such as Incident Responder, Threat Hunter, Security 
 
 A **Threat Hunter** proactively searches the organisation's data and systems for signs of attackers that may not have triggered an alert yet. Instead of waiting for something to happen, they actively search for threats.
 
+### Challenges 
+
+A SOC can face too many alerts (too much data), false positives, alert fatigue, a lack of skilled staff, difficulty responding quickly to real threats, insider threats and keeping up to date with new threats.
+
 ### Common Event Types in a SOC
 
 A SOC monitors events that could indicate **normal activity, suspicious behaviour or an attack**.
