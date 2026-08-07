@@ -105,7 +105,7 @@ Cloud - Splunk hosted, PaaS (Product as a Service), SaaS (Software as a Service)
 A basic Splunk environment can be thought of as:
 
 ```text
-💻 Data Sources
+💻 Data Sources - where the data is from
      ↓
 📤 Universal Forwarders - in charge of ingestion to indexers, forward the data from the data searches
      ↓
@@ -116,3 +116,28 @@ A basic Splunk environment can be thought of as:
 👩‍💻 Analyst
 ```
 
+- What are some of the options for deploying Splunk (Search Head)?
+- What are some of the basic terms in Splunk?
+- What type of data/files does Splunk usually ingest? CSV, JSON, log file, or txt file
+- How can Splunk onboard/ingest data?
+- What is SPL? Search Processing Language
+- Show some basic examples of SPL:
+- Basic searches
+- Basic transformations
+- Basic visualisations
+- What are some of the things you can produce in Splunk (e.g. dashboards)?
+- Best practices for securing data on Splunk? (optional)
+- What are Splunk apps vs Splunk addons? Add-ons are packages used to bring in parse or normalise data, more of a backend thing. An app is a packaged set of dashboards, searches, configurations and KOs. It's bigger, and there are things that ppl already built.
+- Case studies of Splunk being used?
+- Security/SOC
+- Data/business analysis
+- Any others
+- Best practices for securing data on Splunk?
+- Splunk certification path? Certifications related to or helpful for SOC?
+- Encrypting data in Splunk? (super optional)
+- AI with Splunk? (super optional)
+- Recommended datasets for Splunk? (super optional)
+- Guides/walk-throughs/demos for Splunk? (Super optional)
+- Make sure this README is professional-looking, has decent detail, is in your own words and features images/tables/bullet points where appropriate.
+- Knowledge Object - reusable Splunk object. ex: saved search, field extractions, tags, macros, anything that you save
+- Apps vs add-ons are packages used to bring in parse or normalise data
