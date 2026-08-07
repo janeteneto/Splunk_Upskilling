@@ -34,6 +34,8 @@ localhost:8000
 ```
 If successful, it should look like this:
 
+<img width="614" height="461" alt="Screenshot 2026-08-06 at 15 09 01" src="https://github.com/user-attachments/assets/29147b37-7e8d-4a3d-9292-ec99686bd176" />
 
 8. Log in to Splunk Enterprise inside the container using the username admin and the password you set when you ran the Docker image.
-9. 
+
+9. Now we need to ingest the data into our Splunk.
