@@ -115,6 +115,38 @@ A basic Splunk environment can be thought of as:
      ↓
 👩‍💻 Analyst
 ```
+## Getting data into Splunk - The data pipeline
+
+input - forwarders have the data, data=streams
+
+parsing - processing of data, data=events
+
+license usage - license meter check
+
+indexing
+
+input types - files and directories
+
+source - path of the data, method to collect the data
+
+host - who sent the data
+
+source type - data format
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 - What are some of the options for deploying Splunk (Search Head)?
 - What are some of the basic terms in Splunk?
