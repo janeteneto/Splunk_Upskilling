@@ -115,28 +115,47 @@ A basic Splunk environment can be thought of as:
      ↓
 👩‍💻 Analyst
 ```
+
 ## Getting data into Splunk - The data pipeline
 
-input - forwarders have the data, data=streams
+- Input - forwarders have the data, data=streams
+- Parsing - processing of data, data=events
+- License usage - license meter check
+- Input types - files and directories
+- Source - path of the data, method to collect the data
+- Host - who sent the data
+- Source type - data format
 
-parsing - processing of data, data=events
+### App vs Add-on 
+You can create your own and publish them to Splunk
+premium apps for extra costs - enterprise security, etc
+apps - aws, azure, corelight
+add-on or ta (technology add-on) - something that runs in the background, no GUI - Juniper, Unix, and Linux
+There can app or an add-on from the same vendor
 
-license usage - license meter check
+### Knowledge Objects (KOs)
 
-indexing
+- Tools - conduct analysis, enrich your events
+- A lot of things are KOS: fields, field extractions, a lookup, a tag, a field alias, a data model, and a saved search.
+- Teamwork- every KO can be shared, reused, and searched based on permissions
 
-input types - files and directories
+- Knowledge manager - oversees object creation, the person who provides centralised management for Splunk, eg: owner of a dashboard,
+- Permissions
+- private - only the person who created the object can use
+- This app only
+- all apps - object persists globally across all apps
 
-source - path of the data, method to collect the data
+### Fields
+- key value pairs
+- searchable by name
+- ability to search multiple fields at once
+- created by Splunk or recognised from an Add-on
 
-host - who sent the data
-
-source type - data format
-
-
-
-
-
+### SPL - Search Processing Language
+- orange - command modifiers, or, not, and, as, by
+- blue - the commands, stats, table, rename, dedup, sort, timechart
+- green - the arguments - limit, span
+- purple - tostring, sum, values, min, max, avg
 
 
 
