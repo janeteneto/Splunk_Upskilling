@@ -94,11 +94,11 @@ I think of SIEM like a smart home security system. It has a camera that detects 
 
 **Versions of Splunk**
 
-Enterprise - full control, IaaS (Infrastructure as a Service)
+**Enterprise** - full control, IaaS (Infrastructure as a Service)
 
 vs
 
-Cloud - Splunk hosted, PaaS (Product as a Service), SaaS (Software as a Service)
+**Cloud** - Splunk hosted, PaaS (Product as a Service), SaaS (Software as a Service)
 
 ### 🏗️ Splunk Architecture
 
@@ -116,7 +116,7 @@ A basic Splunk environment can be thought of as:
 👩‍💻 Analyst
 ```
 
-## Getting data into Splunk - The data pipeline
+### Data pipeline terminology
 
 - Input - forwarders have the data, data=streams
 - Parsing - processing of data, data=events
@@ -127,35 +127,71 @@ A basic Splunk environment can be thought of as:
 - Source type - data format
 
 ### App vs Add-on 
-You can create your own and publish them to Splunk
-premium apps for extra costs - enterprise security, etc
-apps - aws, azure, corelight
-add-on or ta (technology add-on) - something that runs in the background, no GUI - Juniper, Unix, and Linux
-There can app or an add-on from the same vendor
+- You can create your own and publish them to Splunk
+- Premium apps for extra costs - enterprise security, etc
+- Apps - AWS, Azure, Corelight
+- Add-on or TA (technology add-on) - something that runs in the background, no GUI - Juniper, Unix, and Linux
+- There can be an add-on from the same vendor
 
 ### Knowledge Objects (KOs)
 
 - Tools - conduct analysis, enrich your events
 - A lot of things are KOS: fields, field extractions, a lookup, a tag, a field alias, a data model, and a saved search.
-- Teamwork- every KO can be shared, reused, and searched based on permissions
-
-- Knowledge manager - oversees object creation, the person who provides centralised management for Splunk, eg: owner of a dashboard,
-- Permissions
-- private - only the person who created the object can use
-- This app only
-- all apps - object persists globally across all apps
+- Teamwork - every KO can be shared, reused, and searched based on permissions
+- Knowledge Manager - oversees object creation, the person who provides centralised management for Splunk, eg, owner of a dashboard,
+- Permissions can be: Private, This app only, or All apps (object persists globally across all apps)
 
 ### Fields
-- key value pairs
-- searchable by name
-- ability to search multiple fields at once
-- created by Splunk or recognised from an Add-on
+- Key value pairs
+- Searchable by name
+- Ability to search multiple fields at once
+- Created by Splunk or recognised from an Add-on
 
 ### SPL - Search Processing Language
-- orange - command modifiers, or, not, and, as, by
-- blue - the commands, stats, table, rename, dedup, sort, timechart
-- green - the arguments - limit, span
-- purple - tostring, sum, values, min, max, avg
+Syntax and colours:
+- Orange - command modifiers: or, not, and, as, by
+- Blue - the actual commands: stats, table, rename, dedup, sort, timechart
+- Green - the arguments: limit, span
+- Purple - the functions: tostring, sum, values, min, max, avg
+
+### Transforming Command
+- is a search command that orders the results into a data table, transforming searches
+- Top - top number values of a field and puts them in a table
+- rare does the opposite of top
+- stats - calculate statistics - count, dc, sum, avg, list, values, etc 
+
+### Transaction Command
+- maxspan
+- maxpause
+- startwith & endswith
+- events that span time
+- grouping events
+- aid investigations
+- log validation
+
+- transaction vs stats
+- slow and will tax your environment vs faster, more efficient searching
+
+### eval command 
+- calculates fields, functions friendly, creates new fields, converting data
+
+where and search commands
+where, can't place before first | in the SPL, comparing values or searching where
+Search - place it anywhere in the SPL, search on a keyword, or match a value
+
+### fields
+- extraction methods - erex and rex commands
+- regex (unstructured data), delimiters (structured data), commands (work with rex and erex in your SPL)
+
+
+
+
+
+
+
+
+
+
 
 
 
