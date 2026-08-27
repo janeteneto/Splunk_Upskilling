@@ -174,21 +174,172 @@ Syntax and colours:
 
 ### eval command 
 - calculates fields, functions friendly, creates new fields, converting data
+- where and search commands
+- where, can't place before first | in the SPL, comparing values or searching where
+- Search - place it anywhere in the SPL, search on a keyword, or match a value
 
-where and search commands
-where, can't place before first | in the SPL, comparing values or searching where
-Search - place it anywhere in the SPL, search on a keyword, or match a value
+### Fields in Splunk
+- Fields are pieces of information Splunk extracts from raw events, such as username, status, IP address, or product.
+- **Field extraction** means taking useful information out of raw event data and turning it into searchable fields.
+  - There are two main approaches:
+- rex → extracts fields using regular expressions (regex). Useful when the data is unstructured or doesn't have a consistent delimiter.
+- erex → uses examples you provide to work out a pattern and extract the field, so you don't have to write the regex yourself.
+#### Regex vs Delimiters
+Regex is useful for unstructured data when you need to identify patterns.
 
-### fields
-- extraction methods - erex and rex commands
-- regex (unstructured data), delimiters (structured data), commands (work with rex and erex in your SPL)
+**Example event:** Failed password for user john from 192.168.1.10
+
+You could use rex to extract the IP:
+```
+| rex "from (?<ip>\d+\.\d+\.\d+\.\d+)"
+```
+
+Now Splunk creates an IP field containing 192.168.1.10.
+
+- **Delimiters** are used when data has a consistent structure separating values, such as commas, spaces, or pipes.
+Example: John,192.168.1.10,Failed
+
+- The commas are the delimiters, making it easier to separate the data into fields.
+
+**Commands**- rex and erex are SPL commands that you put into your search to extract fields.
+
+## Visualise your data - Chart, timechart, stats
+
+### `chart`
+
+`chart` is used to create **visual comparisons between categories**.
+
+Example:
+
+```spl
+index=main sourcetype=vendor_sales
+| stats sum(price) by product_name
+```
+
+You could display this as a **bar chart** to compare sales between products.
+
+**Think:** *Compare categories.*
+
+---
+
+### `timechart`
+
+`timechart` is specifically for showing **changes over time**.
+
+Example:
+
+```spl
+index=main sourcetype=access_*
+| timechart count
+```
+
+This could create a **line graph showing website traffic over time**.
+
+**Think:** *What's happening over time?*
+
+---
+
+### `stats`
+
+`stats` is mainly used to **calculate and summarise data**. It doesn't automatically create a visual chart.
+
+Example:
+
+```spl
+index=main sourcetype=vendor_sales
+| stats sum(price) by product_name
+```
+
+It gives you a table showing the total price for each product. You can then choose a visualisation such as a bar chart.
+
+**Think:** *Calculate and summarise.*
+
+### `iplocation`
+
+Adds **geographical information** to an IP address, such as country, city, latitude and longitude.
+
+```spl
+| iplocation src
+```
+
+**Think:** IP address → location information.
+
+---
+
+### `geostats`
+
+Uses **latitude and longitude** to show where events are happening geographically, usually on a map.
+
+```spl
+| iplocation src
+| geostats count by Country
+```
+
+- **latfield** → field containing latitude
+- **longfield** → field containing longitude
+- **globallimit** → maximum number of results shown globally
+- **locallimit** → maximum number of results per location
+
+**Think:** Turn location data into a geographical visualisation.
+
+---
+
+### `addtotals`
+
+Adds values together to calculate **totals**.
+
+```spl
+| addtotals
+```
+
+For example, if a chart has several columns representing different categories, `addtotals` can add them together to create a total.
+
+**Think:** Add everything together.
+
+---
+
+### `trendline`
+
+Adds a **trend/moving average** to your results so you can see the general direction of the data rather than individual fluctuations.
+
+Common types:
+
+- **SMA** = Simple Moving Average
+- **EMA** = Exponential Moving Average
+- **WMA** = Weighted Moving Average
+
+Example:
+
+```spl
+| trendline sma5 count
+```
+
+This calculates a **5-period simple moving average** of `count`.
+
+## Reports and Drilldowns
+
+### Reports
+A **report** is a **saved search** in Splunk. Any search can be saved as a report and then **run whenever needed or scheduled** to run automatically. Reports should be **shareable** with other users.
 
 
+### Drilldowns
+A **drilldown** makes a dashboard **interactive**. When you click something in a panel, it can take you to a **search, another dashboard, or a report**.
 
+**Think:** Click a result → investigate it further.
 
+### `$tokens$`
+**Tokens** allow you to pass the value you clicked from one panel to another search.
 
+For example, clicking a hostname could pass:
 
+```text
+$click.value$
+```
 
+to another search, so Splunk shows information specifically about that host.
+
+### Export
+Splunk results can be **exported or printed**, including exporting a dashboard/report as a **PDF**.
 
 
 
