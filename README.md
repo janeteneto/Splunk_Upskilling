@@ -341,13 +341,15 @@ to another search, so Splunk shows information specifically about that host.
 ### Export
 Splunk results can be **exported or printed**, including exporting a dashboard/report as a **PDF**.
 
+## Alerts
+An **alert** is a saved search that automatically runs either **on a schedule** or **in real time** to look for something important.
 
+When the search finds a **matching condition**, the alert **triggers an action**. For example, it could send an **email, webhook, log, or custom action**.
 
+You can define **trigger conditions**, such as:
+> “Trigger when failed login attempts are greater than 10.”
 
-
-
-
-
+Alerts are **Knowledge Objects (KOs)**, so they can be **shared with other Splunk users**. You can also assign a **severity level** to help indicate how serious the alert is.
 
 
 
