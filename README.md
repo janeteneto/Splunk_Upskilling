@@ -351,7 +351,215 @@ You can define **trigger conditions**, such as:
 
 Alerts are **Knowledge Objects (KOs)**, so they can be **shared with other Splunk users**. You can also assign a **severity level** to help indicate how serious the alert is.
 
+## Tags and Event Types
 
+### Tags
+**Tags** are labels you add to events or fields to make data **easier to understand and search**. They act as a quick reminder of what a value represents and are **case-sensitive**.
+
+### Event Types
+**Event types** are **saved searches that identify events matching specific criteria**. They allow you to give a name to a particular type of event and reuse that definition in searches.
+
+For example:
+
+```spl
+eventtype=failed_login
+```
+
+could represent all events where a failed login occurred.
+
+**Think:** Event type = a named search that identifies a specific kind of event.
+
+### Highlighter
+The **Event Highlighting** feature lets you highlight matching words or values in events with colours, making important information easier to spot when reading raw events.
+
+**Easy difference:**
+
+> **Tags = labels**  
+> **Event types = saved criteria for identifying events**  
+> **Highlighters = colours important information**
+
+## Macros
+
+A **macro** is a shortcut for a **saved piece of SPL** that you can reuse by calling its name. It saves time when you repeatedly use the same search or a part of it.
+
+- **Fast:** Instead of typing the same SPL repeatedly, use the macro name.
+- **Repeatable:** The macro stays the same until you edit its definition.
+- **Expandable:** **Command + Shift + E** on Mac can expand the macro in the Search bar so you can see what SPL it contains.
+- **How to run:** Use **backticks**, not single quotes:
+
+```spl
+`macroname`
+```
+
+### Creating a macro
+
+Go to:
+
+**Settings → Advanced Search → Search Macros**
+
+Then create and save your macro.
+
+**Easy summary:**
+
+> **Macro = reusable SPL shortcut.**  
+> **Create:** Settings → Advanced Search → Search Macros  
+> **Run:** `` `macroname` ``
+
+## Workflows
+
+**Workflows** allow you to create **actions from Splunk events** that help you investigate or respond to data.
+
+For example, you could click an **IP address** in an event and use a workflow to search Google or send the IP to another system.
+
+### Workflow Actions
+
+There are three main things you can do:
+
+- **Create workflow action** – define what the workflow should do.
+- **Configure workflow action** – set the URL, parameters, fields, etc.
+- **Validation** – test/check that the workflow works correctly.
+
+### GET
+
+**GET** creates a link/request to retrieve information from a website.
+
+Example: Click an IP address → open a Google search for that IP.
+
+### POST
+
+**POST** sends information to a specific URL.
+
+Example: Send information from a Splunk event to another system to **create an entry or trigger an action**.
+
+**GET and POST are the main workflow actions.**
+
+### Search
+
+A workflow can also launch a **Splunk search** using information from the event.
+
+## Data Normalisation
+
+**Data normalisation** means making data from different sources **consistent**, so it is easier to search, compare and analyse. This is especially important when working with the **Splunk Common Information Model (CIM)**.
+
+### Field Aliases
+
+A **field alias** gives an existing field another name. This allows different data sources that use different field names to be searched using the same field.
+
+Example:
+
+```text
+clientip → src_ip
+```
+
+**Think:** Different names → one standard field name.
+
+---
+
+### Calculated Fields
+
+**Calculated fields** create a new field from existing data using an `eval` expression. They are useful for saving commonly needed calculations so you don't have to recreate them in every search.
+
+Example:
+
+```spl
+eval total=price*quantity
+```
+
+**Think:** Existing fields → calculation → new field.
+
+---
+
+## Buckets
+
+Splunk stores indexed data in **buckets**, which move through different stages as the data gets older:
+
+- **Hot** → newest data; actively being written to.
+- **Warm** → older data that is no longer being actively written to.
+- **Cold** → even older data, usually moved to cheaper storage.
+- **Frozen** → oldest data; removed from searchable storage or archived.
+
+**Important:** Hot, warm and cold buckets are searchable. **Frozen data is normally no longer searchable** unless it has been thawed/restored.
+
+**Think:** Hot → Warm → Cold → Frozen = data getting older.
+
+---
+
+## Job Inspector
+
+**Job Inspector** is a Splunk troubleshooting tool that lets you examine **how efficiently a search ran**.
+
+It provides information about the search, such as:
+- How long it took.
+- How much data was processed.
+- Where time was spent.
+- Potential performance issues.
+
+## Data Models
+
+A **data model** is a structured way of organising related data in Splunk. It groups data into **datasets** with relationships between them, making searches and analysis easier.
+
+### Hierarchical
+
+Data models have a **parent → child structure**.
+
+- **Root dataset** = top-level dataset.
+- **Child dataset** = more specific dataset underneath it.
+
+**Think:** Folder → subfolder → files.
+
+### Dataset Searching
+
+Instead of searching all your data, you can select a **specific data model and dataset** to search.
+
+This makes it easier to focus on a particular type of data, such as **Authentication** or **Web**.
+
+### Normalisation
+
+Data models help with **CIM compliance** by giving different data sources a common structure.
+
+For example, different sources might call an IP field `clientip`, `src_ip`, or `source`. CIM provides a standard way of representing it.
+
+**Think:** Different data → common structure.
+
+### Large Data Searches
+
+Data models can be **accelerated**, allowing Splunk to search large amounts of data much faster.
+
+This is commonly done with **`tstats`**.
+
+---
+
+### `datamodel`
+
+The `datamodel` command lets you **search or retrieve information from a data model**.
+
+Example:
+
+```spl
+| datamodel Authentication search
+```
+
+**Think:** Search a data model.
+
+### `tstats`
+
+`tstats` is a **fast statistical search command**, especially useful for searching **indexed fields and accelerated data models**.
+
+Example:
+
+```spl
+| tstats count from datamodel=Authentication
+```
+
+**Think:** Fast searching of large datasets.
+
+### Pivot
+
+**Pivot** is a Splunk interface that lets you **explore data models without writing SPL manually**.
+
+You select the data model, choose fields/filters, and Splunk builds the results for you.
+
+**Think:** Pivot = visual way to explore a data model.
 
 
 
@@ -367,7 +575,7 @@ Alerts are **Knowledge Objects (KOs)**, so they can be **shared with other Splun
 - Basic visualisations
 - What are some of the things you can produce in Splunk (e.g. dashboards)?
 - Best practices for securing data on Splunk? (optional)
-- What are Splunk apps vs Splunk addons? Add-ons are packages used to bring in parse or normalise data, more of a backend thing. An app is a packaged set of dashboards, searches, configurations and KOs. It's bigger, and there are things that ppl already built.
+- What are Splunk apps vs Splunk addons? Add-ons are packages used to bring in parse or normalise data, more of a backend thing. An app is a packaged set of dashboards, searches, configurations and KOs. It's bigger, and some things ppl already built.
 - Case studies of Splunk being used?
 - Security/SOC
 - Data/business analysis
