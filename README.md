@@ -559,7 +559,27 @@ Example:
 
 You select the data model, choose fields/filters, and Splunk builds the results for you.
 
-**Think:** Pivot = visual way to explore a data model.
+**Think:** Pivot = a visual way to explore a data model.
+
+## Commom Information Model - CIM
+
+CIM - model to use and reference a commom standard of ops for how all data is handled
+an application- cim add on and the cim add on buider are free
+data normaliser - all fields can have the same name, all apps can co-exist together
+
+normalise data - cim gives way to normalise data
+assistance- leverage when creating filed extractions, aliases, tags, etc
+datamodel command - run common seaches that span larger amount of data
+
+splunk premium apps - es relies heavily on cim
+helath check tol- perform faster, more efficient searches
+ease of use- find commonality between splunkers
+audit
+
+
+
+
+
 
 
 
